@@ -1,6 +1,10 @@
-#!/bin/zsh
-cd urbit-docker
-docker build --build-arg TAG=v2.12 --tag urbitwasm:latest
+#!/bin/bash
+cd vere-build
+/bin/bash build.sh
+sudo chown $USER urbit
+cp urbit ../urbit-docker
+cd ../urbit-docker
+docker build --build-arg TAG=v2.12 --tag urbitwasm:latest .
 cd ..
 docker stop $(docker ps|grep httpd|awk '{print $1;}')
 make && sudo make install
